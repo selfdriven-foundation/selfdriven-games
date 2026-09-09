@@ -1,0 +1,630 @@
+---
+layout: null
+title: selfdriven Education
+---
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>selfdriven.games — GAMES WORTH PLAYING</title>
+<meta name="description" content="Machines are taking the boring levels. What's left is the good stuff: quests, crews, mastery, and games worth playing. selfdriven.games.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Poppins:wght@500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f0e6; --surface:#fff; --ink:#14110e; --muted:#6b5f52;
+  --curious:#f5c842; --caring:#ff5c4d; --constructive:#4ade80; --chill:#6f8fff;
+  --shadow-hard:6px 6px 0 var(--ink);
+  --shadow-hard-sm:3px 3px 0 var(--ink);
+  --shadow-hard-lg:10px 10px 0 var(--ink);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#14110e; --surface:#1f1c18; --ink:#f5f0e6; --muted:#b0a89e; }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Poppins',sans-serif;font-weight:500;line-height:1.6;overflow-x:hidden}
+.wrap{max-width:1140px;margin:0 auto;padding:0 22px}
+h1,h2,h3,.brand,.bg{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.04em;line-height:1}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:inherit}
+section{padding:82px 0;position:relative}
+
+/* ===== HUD ===== */
+.hud{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--ink);color:var(--bg);border-bottom:3px solid var(--ink)}
+.hud-in{max-width:1140px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:16px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.hud .lives{color:var(--caring)}
+.xp-shell{flex:1;height:12px;background:rgba(128,128,128,.35);border:2px solid var(--bg);position:relative;min-width:90px}
+.xp-fill{height:100%;width:0;background:var(--constructive);transition:width .4s cubic-bezier(.34,1.56,.64,1)}
+.hud .xpnum{color:var(--curious)}
+@media(max-width:640px){.hud .hide-s{display:none}}
+
+/* ===== NAV ===== */
+nav{position:sticky;top:34px;z-index:150;padding:14px 0}
+.nav-in{max-width:1140px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:14px}
+.brand{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:2.5px solid var(--ink);box-shadow:var(--shadow-hard-sm);padding:8px 14px;font-size:17px;text-decoration:none;transform:rotate(-1deg)}
+.brand .chip{width:24px;height:24px;background:var(--curious);border:2.5px solid var(--ink);display:grid;place-items:center;color:#14110e}
+.brand .chip svg{width:13px;height:13px}
+.nav-links{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+.nav-links a{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:8px 12px;border:2.5px solid var(--ink);background:var(--surface);box-shadow:var(--shadow-hard-sm);transition:transform .15s,box-shadow .15s}
+.nav-links a:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* ===== BUTTONS ===== */
+.btn{display:inline-flex;align-items:center;gap:9px;border:3px solid var(--ink);box-shadow:var(--shadow-hard);padding:14px 26px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.02em;text-decoration:none;background:var(--surface);transition:transform .15s,box-shadow .15s;cursor:pointer}
+.btn svg{width:17px;height:17px}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn-y{background:var(--curious);color:#14110e}
+.btn-r{background:var(--caring);color:#14110e}
+.btn-g{background:var(--constructive);color:#14110e}
+.btn-b{background:var(--chill);color:#14110e}
+
+/* ===== HERO ===== */
+header{padding:26px 0 60px;position:relative}
+.tag{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:7px 14px;border:2.5px solid var(--ink);transform:rotate(-1.5deg)}
+.tag .dot{width:8px;height:8px;background:var(--constructive);border-radius:50%;animation:blink 1.1s steps(2,end) infinite}
+@keyframes blink{50%{opacity:0}}
+h1{font-size:clamp(46px,10.5vw,116px);margin:22px 0 0;line-height:.92;text-transform:uppercase}
+h1 .l1{display:block}
+h1 .hl{display:inline-block;background:var(--curious);color:#14110e;padding:2px 12px 6px;border:3px solid var(--ink);box-shadow:var(--shadow-hard);transform:rotate(-1.2deg)}
+h1 .hl2{background:var(--caring)}
+.hero-p{font-size:19px;font-weight:600;max-width:600px;margin-top:30px}
+.hero-p span{background:var(--constructive);color:#14110e;padding:0 6px;box-shadow:2px 2px 0 var(--ink)}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
+.stickers{position:absolute;inset:0;pointer-events:none;z-index:-1}
+.sticker{position:absolute;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border:2.5px solid var(--ink);padding:8px 12px;background:var(--surface);box-shadow:var(--shadow-hard-sm)}
+.s1{top:70px;right:4%;transform:rotate(7deg);background:var(--chill);color:#14110e}
+.s2{top:210px;right:12%;transform:rotate(-6deg);background:var(--caring);color:#14110e}
+.s3{top:330px;right:2%;transform:rotate(3deg);background:var(--constructive);color:#14110e}
+@media(max-width:1000px){.stickers{display:none}}
+
+/* ===== MARQUEE ===== */
+.marquee{border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:var(--ink);color:var(--bg);overflow:hidden;padding:11px 0;transform:rotate(-1deg);margin:44px 0 0;width:106%;margin-left:-3%}
+.mq-track{display:flex;gap:34px;white-space:nowrap;animation:mq 26s linear infinite;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;text-transform:uppercase;letter-spacing:-.02em}
+.mq-track span{display:inline-flex;align-items:center;gap:34px}
+.mq-track b{color:var(--curious)}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.mq-track{animation:none}}
+
+/* ===== LEVEL HEADS ===== */
+.lvl{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border:2.5px solid var(--ink);padding:7px 13px;background:var(--surface);box-shadow:var(--shadow-hard-sm);margin-bottom:20px;transform:rotate(-1deg)}
+.lvl b{background:var(--ink);color:var(--bg);padding:2px 7px}
+h2{font-size:clamp(32px,5.6vw,60px);text-transform:uppercase;line-height:.95;margin-bottom:18px}
+h2 mark{background:var(--curious);color:#14110e;padding:0 8px;box-shadow:3px 3px 0 var(--ink)}
+.lead{font-size:17px;font-weight:500;color:var(--muted);max-width:640px}
+
+/* ===== CARDS ===== */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:40px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:40px}
+@media(max-width:920px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g3,.g4,.g2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:3px solid var(--ink);box-shadow:var(--shadow-hard);padding:26px 22px;transition:transform .18s,box-shadow .18s}
+.card:nth-child(odd){transform:rotate(-.7deg)}
+.card:nth-child(even){transform:rotate(.7deg)}
+.card:hover{transform:translate(-4px,-4px) rotate(0deg);box-shadow:var(--shadow-hard-lg)}
+.card h3{font-size:21px;margin:14px 0 9px;text-transform:uppercase}
+.card p{font-size:15px;color:var(--muted)}
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:2.5px solid var(--ink);padding:4px 9px;background:var(--curious);color:#14110e}
+.ic{width:46px;height:46px;border:3px solid var(--ink);display:grid;place-items:center;background:var(--bg);margin-bottom:4px}
+.ic svg{width:23px;height:23px}
+
+/* ===== BOSS ===== */
+.boss{background:var(--ink);color:var(--bg);border:3px solid var(--ink);box-shadow:var(--shadow-hard-lg);padding:44px 38px;transform:rotate(-.6deg);margin-top:40px}
+.boss .lbl{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--caring);margin-bottom:16px}
+.boss p.big{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(22px,3.6vw,38px);line-height:1.12;letter-spacing:-.03em}
+.boss p.big em{font-style:normal;background:var(--caring);color:#14110e;padding:0 8px}
+.hpbar{margin-top:26px;height:16px;border:2.5px solid var(--bg);background:rgba(128,128,128,.3)}
+.hpbar i{display:block;height:100%;width:62%;background:var(--caring)}
+.hplabel{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-top:8px;opacity:.7}
+@media(max-width:600px){.boss{padding:30px 22px}}
+
+/* ===== VS PAIRS ===== */
+.vs{display:grid;grid-template-columns:1fr;gap:0;margin-top:40px;border:3px solid var(--ink);box-shadow:var(--shadow-hard);background:var(--surface)}
+.vs-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:18px 22px;border-bottom:2.5px solid var(--ink)}
+.vs-row:last-child{border-bottom:none}
+.vs-row .a{font-size:15px;color:var(--muted);font-weight:600}
+.vs-row .b{font-size:16px;font-weight:800;font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em}
+.vs-row .x{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;background:var(--caring);color:#14110e;border:2.5px solid var(--ink);padding:3px 8px}
+@media(max-width:700px){.vs-row{grid-template-columns:1fr;gap:8px}.vs-row .x{justify-self:start}}
+
+/* ===== CLASSES (4Cs) ===== */
+.cls{border:3px solid var(--ink);background:var(--surface);box-shadow:var(--shadow-hard);padding:0;overflow:hidden;transition:transform .18s,box-shadow .18s}
+.cls:hover{transform:translate(-4px,-4px) rotate(0deg);box-shadow:var(--shadow-hard-lg)}
+.cls:nth-child(odd){transform:rotate(-.8deg)}
+.cls:nth-child(even){transform:rotate(.8deg)}
+.cls-top{background:var(--m);color:#14110e;padding:20px 20px 16px;border-bottom:3px solid var(--ink)}
+.cls-top .ic{background:rgba(255,255,255,.55);border-color:#14110e;margin-bottom:12px}
+.cls-top h3{font-size:23px;text-transform:uppercase;margin:0}
+.cls-top .es{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;opacity:.75}
+.cls-body{padding:18px 20px 22px}
+.cls-body p{font-size:14.5px;color:var(--muted);margin-bottom:16px}
+.stat{display:flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:7px}
+.stat .bar{flex:1;height:9px;border:2px solid var(--ink);background:var(--bg)}
+.stat .bar i{display:block;height:100%;background:var(--m)}
+
+/* ===== QUEST BOARD ===== */
+.qb{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+@media(max-width:900px){.qb{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.qb{grid-template-columns:1fr}}
+.quest{background:var(--surface);border:3px solid var(--ink);box-shadow:var(--shadow-hard-sm);padding:16px 16px 14px;cursor:pointer;transition:transform .16s,box-shadow .16s,background .16s;user-select:none;text-align:left;font-family:inherit;color:inherit;width:100%}
+.quest:hover{transform:translate(-3px,-3px);box-shadow:var(--shadow-hard)}
+.quest .qh{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.quest .qh svg{width:19px;height:19px;flex:none}
+.quest .qt{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;letter-spacing:-.02em;line-height:1.15}
+.quest .qm{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.quest .qxp{background:var(--curious);color:#14110e;border:2px solid var(--ink);padding:2px 7px}
+.quest.on{background:var(--constructive);color:#14110e}
+.quest.on .qm{color:#14110e}
+.quest.on .qxp{background:#14110e;color:var(--constructive);border-color:#14110e}
+.qhint{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:18px}
+
+/* ===== SCORE ===== */
+.score{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px}
+@media(max-width:700px){.score{grid-template-columns:1fr}}
+.sc{border:3px solid var(--ink);box-shadow:var(--shadow-hard);padding:28px 24px;background:var(--surface)}
+.sc.bad{transform:rotate(-.8deg)}
+.sc.good{transform:rotate(.8deg);background:var(--constructive);color:#14110e}
+.sc h3{font-size:20px;text-transform:uppercase;margin-bottom:16px}
+.sc ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.sc li{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:2.5px solid var(--ink);padding:5px 10px;background:var(--bg)}
+.sc.good li{background:rgba(255,255,255,.6);color:#14110e}
+.sc .tagline{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;opacity:.7}
+
+/* ===== CHIP ROW ===== */
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.chip{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border:2.5px solid var(--ink);box-shadow:var(--shadow-hard-sm);padding:8px 13px;background:var(--surface);transition:transform .15s}
+.chip:nth-child(3n){background:var(--curious);color:#14110e}
+.chip:nth-child(4n){background:var(--chill);color:#14110e}
+.chip:nth-child(5n){background:var(--caring);color:#14110e}
+.chip:hover{transform:translateY(-4px) rotate(-2deg)}
+
+/* ===== END CTA ===== */
+.end{border:3px solid var(--ink);box-shadow:var(--shadow-hard-lg);background:var(--curious);color:#14110e;padding:56px 40px;text-align:center;transform:rotate(-.5deg);margin-top:20px;position:relative;overflow:hidden}
+.end h2{margin-bottom:16px}
+.end h2 mark{background:#14110e;color:var(--curious)}
+.end p{font-size:17px;font-weight:600;max-width:560px;margin:0 auto 28px}
+.end .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.end .btn{border-color:#14110e;box-shadow:6px 6px 0 #14110e}
+.end .btn:hover{box-shadow:9px 9px 0 #14110e}
+@media(max-width:600px){.end{padding:38px 22px}}
+
+/* ===== FOOTER ===== */
+footer{border-top:3px solid var(--ink);background:var(--ink);color:var(--bg);padding:34px 0}
+.ft{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.ft a{color:var(--curious);text-decoration:none}
+.ft a:hover{text-decoration:underline}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(28px)}
+.reveal.vis{opacity:1;transform:translateY(0);transition:opacity .5s,transform .55s cubic-bezier(.34,1.56,.64,1)}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+/* ===== TOAST ===== */
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120px);z-index:300;background:var(--ink);color:var(--bg);border:3px solid var(--curious);box-shadow:6px 6px 0 var(--curious);padding:13px 22px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:transform .3s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
+.toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-dice" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 8h.01"/><path d="M12 12h.01"/><path d="M16 16h.01"/></symbol>
+  <symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+  <symbol id="ic-swords" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/><line x1="19" y1="21" x2="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" y1="14" x2="9" y2="18"/><line x1="7" y1="17" x2="4" y2="20"/><line x1="3" y1="19" x2="5" y2="21"/></symbol>
+  <symbol id="ic-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></symbol>
+  <symbol id="ic-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+  <symbol id="ic-telescope" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="13" r="3"/><path d="M3 7l5.5 2.5"/><path d="M3 7l2-4 14.5 6.5-2 4"/><path d="M8.5 9.5L6 20h5l1.5-4"/><path d="M17 16v4"/></symbol>
+  <symbol id="ic-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+  <symbol id="ic-hammer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0a2.12 2.12 0 0 1 0-3L12 9"/><path d="M17.64 15 22 10.64"/><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91"/></symbol>
+  <symbol id="ic-waves" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></symbol>
+  <symbol id="ic-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+  <symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="ic-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+  <symbol id="ic-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+  <symbol id="ic-compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+  <symbol id="ic-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31"/><path d="M14 9.3V1.99"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/><path d="M5.52 16h12.96"/></symbol>
+  <symbol id="ic-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></symbol>
+  <symbol id="ic-languages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></symbol>
+  <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></symbol>
+  <symbol id="ic-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="ic-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></symbol>
+  <symbol id="ic-infinity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c-2-2.67-4-4-6-4a4 4 0 1 0 0 8c2 0 4-1.33 6-4Zm0 0c2 2.67 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.33-6 4Z"/></symbol>
+  <symbol id="ic-mountain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></symbol>
+  <symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+</svg>
+
+<div class="hud">
+  <div class="hud-in">
+    <span class="lives">&#9679;&#9679;&#9679;</span>
+    <span class="hide-s">Player&nbsp;1</span>
+    <span class="xp-shell"><i class="xp-fill" id="xpfill"></i></span>
+    <span class="xpnum"><span id="xpnum">0</span>&nbsp;XP</span>
+    <span class="hide-s">LVL&nbsp;<span id="lvlnum">1</span></span>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-in">
+    <a class="brand" href="#top"><span class="chip"><svg><use href="#ic-dice"/></svg></span>selfdriven.games</a>
+    <div class="nav-links">
+      <a href="#lvl1">Lvl 1</a>
+      <a href="#boss">Boss</a>
+      <a href="#rules">Rules</a>
+      <a href="#classes">Classes</a>
+      <a href="#board">Quests</a>
+      <a href="#score">Score</a>
+    </div>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap">
+    <div class="stickers">
+      <div class="sticker s1">no cheat codes</div>
+      <div class="sticker s2">co-op enabled</div>
+      <div class="sticker s3">infinite lives</div>
+    </div>
+    <span class="tag"><span class="dot"></span>Press start</span>
+    <h1>
+      <span class="l1">The machines</span>
+      <span class="l1">are taking</span>
+      <span class="l1"><span class="hl">the boring</span></span>
+      <span class="l1"><span class="hl hl2">levels.</span></span>
+    </h1>
+    <p class="hero-p">For all of history, life handed you the objectives. Find food. Get a job. Beat the other guy. Now intelligence is cheap and a lot of that gets automated — so the real question becomes <span>what game do you actually want to play?</span></p>
+    <div class="hero-btns">
+      <a class="btn btn-y" href="#lvl1">Start the run <svg><use href="#ic-arrow"/></svg></a>
+      <a class="btn btn-b" href="#board">Open quest board</a>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="mq-track">
+      <span>Games worth playing <b>&#9670;</b> Chosen challenges <b>&#9670;</b> Quests not jobs <b>&#9670;</b> The outcome is you <b>&#9670;</b> No final level <b>&#9670;</b> Curious Caring Constructive Chill <b>&#9670;</b>&nbsp;</span>
+      <span>Games worth playing <b>&#9670;</b> Chosen challenges <b>&#9670;</b> Quests not jobs <b>&#9670;</b> The outcome is you <b>&#9670;</b> No final level <b>&#9670;</b> Curious Caring Constructive Chill <b>&#9670;</b>&nbsp;</span>
+    </div>
+  </div>
+</header>
+
+<section id="lvl1">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Level 01</b> The old game</span>
+      <h2>Work was <mark>always a game</mark>. Nobody called it that.</h2>
+      <p class="lead">Objectives. Rules. Scores. Levels. Status. Teams. Rivals. You grind skills, complete challenges, level up, earn resources, build rep, unlock the next area. That's a career. It's also an RPG with worse graphics.</p>
+    </div>
+    <div class="g3">
+      <div class="card reveal">
+        <div class="ic"><svg><use href="#ic-mountain"/></svg></div>
+        <span class="badge">Old rules</span>
+        <h3>Scarcity set the quests</h3>
+        <p>Not enough food, land, money, knowledge, skill, time. When something is scarce, getting it matters. That's where the objectives came from — nobody had to design them.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg><use href="#ic-cpu"/></svg></div>
+        <span class="badge" style="background:var(--chill)">Patch notes</span>
+        <h3>Smart gets copied now</h3>
+        <p>Human expertise can't be duplicated. Machine intelligence can. Once a capable system exists, the next thousand copies are cheap. That's a rule change civilisation has never had before.</p>
+      </div>
+      <div class="card reveal">
+        <div class="ic"><svg><use href="#ic-swords"/></svg></div>
+        <span class="badge" style="background:var(--caring)">Side effect</span>
+        <h3>The levels get cleared for you</h3>
+        <p>Brilliant news, mostly. But a lot of the challenges people built their lives around just... vanish. What happens when fewer things need us?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="boss">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Boss fight</b> The abundance paradox</span>
+      <h2>Problems were doing a <mark>job</mark> we didn't notice.</h2>
+      <p class="lead">A mountain creates the possibility of climbing it. A broken thing creates the possibility of fixing it. An unknown creates the possibility of finding out. Remove the obstacle and the suffering goes — but so does the challenge.</p>
+    </div>
+    <div class="boss reveal">
+      <div class="lbl">&#9654; Boss: The Abundance Paradox</div>
+      <p class="big">The better we get at deleting problems nobody chose, the more it matters that we <em>design challenges people do choose.</em></p>
+      <div class="hpbar"><i></i></div>
+      <div class="hplabel">Weakness: voluntary difficulty &nbsp;·&nbsp; Party required</div>
+    </div>
+  </div>
+</section>
+
+<section id="rules">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Level 02</b> How games actually work</span>
+      <h2>Every good game is <mark>made-up difficulty</mark>.</h2>
+      <p class="lead">There is no law of physics that says a bishop moves diagonally. Someone invented that. The invented restriction is the whole reason the game exists.</p>
+    </div>
+    <div class="g3">
+      <div class="card reveal">
+        <span class="badge">Chess</span>
+        <h3>Arbitrary on purpose</h3>
+        <p>Nothing requires diagonal moves. The pointless rule is what creates somewhere interesting to think.</p>
+      </div>
+      <div class="card reveal">
+        <span class="badge" style="background:var(--constructive)">Football</span>
+        <h3>Easy would ruin it</h3>
+        <p>Just pick the ball up and walk it in. Simpler? Yes. Still a game? Not even slightly.</p>
+      </div>
+      <div class="card reveal">
+        <span class="badge" style="background:var(--chill)">Golf</span>
+        <h3>Difficulty by design</h3>
+        <p>Walk over, drop the ball in the hole. Done. The whole sport is an agreement not to do that.</p>
+      </div>
+    </div>
+    <div class="chips reveal">
+      <span class="chip">limited moves</span><span class="chip">a clock</span><span class="chip">limited resources</span>
+      <span class="chip">boundaries</span><span class="chip">rules</span><span class="chip">opponents</span>
+      <span class="chip">uncertainty</span><span class="chip">levels</span><span class="chip">objectives</span>
+    </div>
+    <div class="g2" style="margin-top:34px">
+      <div class="card reveal">
+        <span class="badge" style="background:var(--caring)">Old save file</span>
+        <h3>&#8220;Here's a problem. Solve it or suffer.&#8221;</h3>
+        <p>Objectives assigned by circumstance. Effort extracted by consequence. Failure expensive and often permanent.</p>
+      </div>
+      <div class="card reveal">
+        <span class="badge" style="background:var(--constructive)">New game+</span>
+        <h3>&#8220;Here are a thousand challenges. Which one is worth it?&#8221;</h3>
+        <p>You pick the objective. Effort becomes self-directed. Failure is survivable — and that's what makes it useful.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cheat">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Level 03</b> No cheat codes</span>
+      <h2>An AI can't play <mark>your run</mark> for you.</h2>
+      <p class="lead">A chess engine has flattened every human for decades. People still play chess. Calculators exist. People still learn maths. Cars are faster than you. People still run marathons. Sometimes the output <em>is</em> the player.</p>
+    </div>
+    <div class="vs reveal">
+      <div class="vs-row"><div class="a">An AI runs the marathon for you</div><div class="x">nope</div><div class="b">You did not get fitter.</div></div>
+      <div class="vs-row"><div class="a">An AI lifts your weights</div><div class="x">nope</div><div class="b">You did not get stronger.</div></div>
+      <div class="vs-row"><div class="a">An AI plays your chess match</div><div class="x">nope</div><div class="b">You did not get sharper.</div></div>
+      <div class="vs-row"><div class="a">An AI texts your mate for you</div><div class="x">nope</div><div class="b">You did not get closer.</div></div>
+    </div>
+    <div class="boss reveal" style="transform:rotate(.5deg);margin-top:34px">
+      <div class="lbl">&#9654; The inversion</div>
+      <p class="big">Old world: you do the task to make the thing.<br>New world: the task exists to make <em>you.</em></p>
+    </div>
+  </div>
+</section>
+
+<section id="classes">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Level 04</b> Pick your class</span>
+      <h2>Four modes. <mark>Swap freely.</mark></h2>
+      <p class="lead">The selfdriven 4Cs, as a character sheet. Not personality types — modes you move between, all four needed for a run that doesn't burn you out.</p>
+    </div>
+    <div class="g4">
+      <div class="cls reveal" style="--m:var(--curious)">
+        <div class="cls-top">
+          <div class="ic"><svg><use href="#ic-telescope"/></svg></div>
+          <h3>Curious</h3>
+          <div class="es">explore · ask · learn</div>
+        </div>
+        <div class="cls-body">
+          <p>Scout the map. Ask the dumb question. Chase the thing that makes you lean in — that tug is data.</p>
+          <div class="stat">EXPLORE<span class="bar"><i style="width:92%"></i></span></div>
+          <div class="stat">FOCUS<span class="bar"><i style="width:48%"></i></span></div>
+        </div>
+      </div>
+      <div class="cls reveal" style="--m:var(--caring)">
+        <div class="cls-top">
+          <div class="ic"><svg><use href="#ic-heart"/></svg></div>
+          <h3>Caring</h3>
+          <div class="es">listen · hold space</div>
+        </div>
+        <div class="cls-body">
+          <p>Support class. Make the run produce relationships, not transactions. Help the other players. Mind the consequences.</p>
+          <div class="stat">SUPPORT<span class="bar"><i style="width:95%"></i></span></div>
+          <div class="stat">SPEED<span class="bar"><i style="width:42%"></i></span></div>
+        </div>
+      </div>
+      <div class="cls reveal" style="--m:var(--constructive)">
+        <div class="cls-top">
+          <div class="ic"><svg><use href="#ic-hammer"/></svg></div>
+          <h3>Constructive</h3>
+          <div class="es">build · ship · move</div>
+        </div>
+        <div class="cls-body">
+          <p>Make something. Fix something. Leave the map better than you found it. Rough and shipped beats perfect and imagined.</p>
+          <div class="stat">OUTPUT<span class="bar"><i style="width:90%"></i></span></div>
+          <div class="stat">PATIENCE<span class="bar"><i style="width:55%"></i></span></div>
+        </div>
+      </div>
+      <div class="cls reveal" style="--m:var(--chill)">
+        <div class="cls-top">
+          <div class="ic"><svg><use href="#ic-waves"/></svg></div>
+          <h3>Chill</h3>
+          <div class="es">pause · breathe · reset</div>
+        </div>
+        <div class="cls-body">
+          <p>Recovery class, and the one everyone skips. It's a game. Keep perspective, allow failure, enjoy playing it.</p>
+          <div class="stat">RECOVERY<span class="bar"><i style="width:96%"></i></span></div>
+          <div class="stat">URGENCY<span class="bar"><i style="width:20%"></i></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="board">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Quest board</b> Real world, real XP</span>
+      <h2>Stop asking &#8220;what's your job&#8221;. <mark>Ask what you're working on.</mark></h2>
+      <p class="lead">A game is just a tiny governance system: who's playing, what counts, what's allowed, how you settle disputes, how progress gets measured. Point that at the real world and you get quests that actually leave something behind.</p>
+    </div>
+    <div class="qb" id="qb">
+      <button class="quest reveal" data-xp="120"><div class="qh"><svg><use href="#ic-droplet"/></svg><span class="qt">Restore a waterway</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9734;</span><span class="qxp">+120 XP</span></div></button>
+      <button class="quest reveal" data-xp="150"><div class="qh"><svg><use href="#ic-users"/></svg><span class="qt">Show up for older neighbours</span></div><div class="qm"><span>&#9733;&#9733;&#9734;&#9734;</span><span class="qxp">+150 XP</span></div></button>
+      <button class="quest reveal" data-xp="200"><div class="qh"><svg><use href="#ic-code"/></svg><span class="qt">Ship open-source infrastructure</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9733;</span><span class="qxp">+200 XP</span></div></button>
+      <button class="quest reveal" data-xp="110"><div class="qh"><svg><use href="#ic-leaf"/></svg><span class="qt">Rebuild local biodiversity</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9734;</span><span class="qxp">+110 XP</span></div></button>
+      <button class="quest reveal" data-xp="180"><div class="qh"><svg><use href="#ic-compass"/></svg><span class="qt">Mentor someone younger</span></div><div class="qm"><span>&#9733;&#9733;&#9734;&#9734;</span><span class="qxp">+180 XP</span></div></button>
+      <button class="quest reveal" data-xp="240"><div class="qh"><svg><use href="#ic-flask"/></svg><span class="qt">Find something nobody knew</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9733;</span><span class="qxp">+240 XP</span></div></button>
+      <button class="quest reveal" data-xp="160"><div class="qh"><svg><use href="#ic-palette"/></svg><span class="qt">Invent a new art form</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9734;</span><span class="qxp">+160 XP</span></div></button>
+      <button class="quest reveal" data-xp="90"><div class="qh"><svg><use href="#ic-home"/></svg><span class="qt">Fix your neighbourhood space</span></div><div class="qm"><span>&#9733;&#9733;&#9734;&#9734;</span><span class="qxp">+90 XP</span></div></button>
+      <button class="quest reveal" data-xp="130"><div class="qh"><svg><use href="#ic-languages"/></svg><span class="qt">Learn a language properly</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9734;</span><span class="qxp">+130 XP</span></div></button>
+      <button class="quest reveal" data-xp="170"><div class="qh"><svg><use href="#ic-shield"/></svg><span class="qt">Make your community resilient</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9734;</span><span class="qxp">+170 XP</span></div></button>
+      <button class="quest reveal" data-xp="140"><div class="qh"><svg><use href="#ic-book"/></svg><span class="qt">Turn your learning into a game</span></div><div class="qm"><span>&#9733;&#9733;&#9734;&#9734;</span><span class="qxp">+140 XP</span></div></button>
+      <button class="quest reveal" data-xp="260"><div class="qh"><svg><use href="#ic-target"/></svg><span class="qt">Go somewhere nobody's mapped</span></div><div class="qm"><span>&#9733;&#9733;&#9733;&#9733;</span><span class="qxp">+260 XP</span></div></button>
+    </div>
+    <p class="qhint">&#9654; Tap a quest to accept it. Your identity stops being your occupation and starts being your participation.</p>
+  </div>
+</section>
+
+<section id="score">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Level 05</b> The scoreboard</span>
+      <h2>Whatever you score is <mark>what you become</mark>.</h2>
+      <p class="lead">Most games built in the last decade score attention and spending. That's a design choice, and a bad one. Score something else and you get a different kind of player.</p>
+    </div>
+    <div class="score">
+      <div class="sc bad reveal">
+        <div class="tagline">&#9654; Badly designed game</div>
+        <h3>Optimises</h3>
+        <ul>
+          <li>attention</li><li>consumption</li><li>addiction</li><li>status</li>
+          <li>domination</li><li>extraction</li><li>number go up</li>
+        </ul>
+      </div>
+      <div class="sc good reveal">
+        <div class="tagline">&#9654; Well designed game</div>
+        <h3>Optimises</h3>
+        <ul>
+          <li>curiosity</li><li>caring</li><li>construction</li><li>cooperation</li>
+          <li>creativity</li><li>mastery</li><li>contribution</li><li>health</li><li>connection</li>
+        </ul>
+      </div>
+    </div>
+    <div class="boss reveal" style="transform:rotate(-.4deg);margin-top:34px">
+      <div class="lbl">&#9654; Rule of thumb</div>
+      <p class="big">The scoreboard isn't the point. It's just there to <em>show you the journey.</em></p>
+    </div>
+  </div>
+</section>
+
+<section id="scarce">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="lvl"><b>Level 06</b> The new scarcity</span>
+      <h2>Abundance doesn't end scarcity. <mark>It moves it.</mark></h2>
+      <p class="lead">When intelligence, information and compute get cheap, something else becomes the rare drop: actual human engagement. You can't mass-produce attention. You can only care deeply about so many things.</p>
+      <div class="chips">
+        <span class="chip">purpose</span><span class="chip">attention</span><span class="chip">trust</span>
+        <span class="chip">belonging</span><span class="chip">reputation</span><span class="chip">being real</span>
+        <span class="chip">friendships</span><span class="chip">being there in person</span>
+        <span class="chip">shared history</span><span class="chip">agency</span><span class="chip">time</span>
+      </div>
+      <p class="lead" style="margin-top:26px">None of that ships with another GPU.</p>
+    </div>
+  </div>
+</section>
+
+<section id="end">
+  <div class="wrap">
+    <div class="reveal" style="max-width:760px">
+      <span class="lvl"><b>Level &#8734;</b> The infinite game</span>
+      <h2>There is <mark>no final level</mark> of curiosity.</h2>
+      <p class="lead">Finite games have a prize and a winner. Infinite games just keep going — knowledge, science, friendship, creativity, exploration, community, getting better at something. No maximum amount of caring. No last piece of music. No final question. No last friendship worth having.</p>
+    </div>
+    <div class="end reveal">
+      <div class="ic" style="margin:0 auto 20px;background:#14110e;color:var(--curious);border-color:#14110e"><svg><use href="#ic-infinity"/></svg></div>
+      <h2>The risk isn't <mark>nothing to do</mark>.</h2>
+      <p>There will always be things that can be done. The real question is whether you've got things you actually <b>want</b> to do — and that's a design problem. That's what selfdriven.games is for.</p>
+      <div class="btns">
+        <a class="btn" href="https://selfdriven.you">Find your mode <svg><use href="#ic-arrow"/></svg></a>
+        <a class="btn btn-g" href="https://selfdriven.foundation">selfdriven Foundation</a>
+      </div>
+    </div>
+    <div class="boss reveal" style="transform:rotate(.6deg);margin-top:44px">
+      <div class="lbl">&#9654; Final screen</div>
+      <p class="big">Games stop being an escape from reality. They become <em>one of the ways we build it.</em></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap ft">
+    <div><svg style="width:14px;height:14px;vertical-align:-2px;color:var(--curious)"><use href="#ic-trophy"/></svg>&nbsp; selfdriven.games</div>
+    <div>A property of the <a href="https://selfdriven.foundation">selfdriven Foundation</a> · Sydney</div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">Quest accepted</div>
+
+<script>
+(function(){
+  /* ---- scroll reveal ---- */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var i = Array.prototype.indexOf.call(e.target.parentNode.children, e.target);
+      e.target.style.transitionDelay = Math.min(i,6)*60 + 'ms';
+      e.target.classList.add('vis');
+      io.unobserve(e.target);
+    });
+  },{threshold:.12, rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---- XP + level ---- */
+  var xp = 0, MAX = 1000;
+  var fill = document.getElementById('xpfill'),
+      num  = document.getElementById('xpnum'),
+      lvl  = document.getElementById('lvlnum'),
+      toast= document.getElementById('toast');
+  var tid;
+
+  function render(){
+    var pct = Math.min(100, xp / MAX * 100);
+    fill.style.width = pct + '%';
+    num.textContent = xp;
+    lvl.textContent = Math.min(9, 1 + Math.floor(xp/200));
+  }
+  function say(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(tid);
+    tid = setTimeout(function(){ toast.classList.remove('show'); }, 1600);
+  }
+
+  /* XP for reading (scroll depth) */
+  var readXp = 0;
+  window.addEventListener('scroll', function(){
+    var h = document.body.scrollHeight - window.innerHeight;
+    var pct = h > 0 ? window.scrollY / h : 0;
+    var earned = Math.floor(pct * 300 / 25) * 25;
+    if(earned > readXp){ xp += (earned - readXp); readXp = earned; render(); }
+  }, {passive:true});
+
+  /* XP for accepting quests */
+  document.querySelectorAll('.quest').forEach(function(q){
+    q.addEventListener('click', function(){
+      var v = parseInt(q.dataset.xp,10);
+      if(q.classList.toggle('on')){
+        xp += v;
+        say('Quest accepted  +' + v + ' XP');
+      } else {
+        xp -= v;
+        say('Quest abandoned  -' + v + ' XP');
+      }
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

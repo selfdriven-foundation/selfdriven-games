@@ -1,0 +1,15 @@
+title: "selfdriven Games"
+description: "Frameworks for games"
+context: "education"
+repo: "selfdriven-education"
+baseurl: ""
+url: ""
+defaults:
+  - scope:
+      path: "pages"
+      type: "pages"
+    values:
+      layout: default
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
